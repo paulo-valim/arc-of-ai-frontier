@@ -13,6 +13,23 @@
     --bg:#f4f5f1; --ink:#12160f; --muted:#5b6356; --card:#fff; --line:#dfe3d8;
     --dark:#0d100e; --orange:#ff5a1f; --teal:#3fb3c6;
   }
+  /* Logo palettes: c1 → c2 → c3 is the arc gradient; accent is the highlight on dark, accent-light on white */
+  body{--c1:#3fb3c6;--c2:#8fb9a8;--c3:#ff5a1f;--accent:#ff5a1f;--accent-light:#ff5a1f}
+  body[data-palette="lime"]{--c1:#2fb6a6;--c2:#7fe0b0;--c3:#ddff67;--accent:#ddff67;--accent-light:#4e8a12}
+  body[data-palette="electric"]{--c1:#7b5cff;--c2:#3d8bff;--c3:#34e0ff;--accent:#34e0ff;--accent-light:#5a3df0}
+  body[data-palette="sunset"]{--c1:#e8368f;--c2:#ff6b4a;--c3:#ffb020;--accent:#ffb020;--accent-light:#e8368f}
+  body[data-palette="ocean"]{--c1:#2747d8;--c2:#3aa0ff;--c3:#5ef2d6;--accent:#5ef2d6;--accent-light:#2747d8}
+  body[data-palette="mono"]{--c1:#8a9087;--c2:#c9cec4;--c3:#ffffff;--accent:#ffffff;--accent-light:#12160f}
+  .panel.light,.panel.light~*{--accent:var(--accent-light)}
+  .palettebar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .palettebar .wrap{display:flex;gap:10px;align-items:center;padding:12px 0;overflow-x:auto}
+  .palettebar strong{font-size:.8125rem;margin-right:6px;white-space:nowrap}
+  .chip{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 12px 6px 6px;font:600 .8125rem Manrope,sans-serif;color:var(--ink);cursor:pointer;white-space:nowrap}
+  .chip[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+  .chip i{display:block;width:42px;height:18px;border-radius:999px}
+  .swatches{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .swatches span{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--muted);font-family:ui-monospace,monospace}
+  .swatches b{width:18px;height:18px;border-radius:5px;border:1px solid #0002}
   *{box-sizing:border-box;margin:0}
   body{font-family:Manrope,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
   .wrap{width:min(1120px,100% - 32px);margin:0 auto}
@@ -54,23 +71,23 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="g-arc" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#3fb3c6"/><stop offset=".55" stop-color="#8fb9a8"/><stop offset="1" stop-color="#ff5a1f"/>
+      <stop offset="0" style="stop-color:var(--c1)"/><stop offset=".55" style="stop-color:var(--c2)"/><stop offset="1" style="stop-color:var(--c3)"/>
     </linearGradient>
     <linearGradient id="g-orange" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ff5a1f"/><stop offset="1" stop-color="#ff9466"/>
+      <stop offset="0" style="stop-color:var(--c3)"/><stop offset="1" style="stop-color:var(--c2)"/>
     </linearGradient>
     <linearGradient id="g-teal" x1="0" y1="1" x2="1" y2="0">
-      <stop offset="0" stop-color="#2e93a8"/><stop offset="1" stop-color="#6fd0dc"/>
+      <stop offset="0" style="stop-color:var(--c1)"/><stop offset="1" style="stop-color:var(--c2)"/>
     </linearGradient>
 
     <!-- 1 · Horizon -->
     <symbol id="mark-1" viewBox="0 0 120 120">
       <path d="M14 96 A46 46 0 0 1 106 96" fill="none" stroke="url(#g-arc)" stroke-width="15" stroke-linecap="round"/>
-      <path d="M98 30 l3.2 8.8 8.8 3.2 -8.8 3.2 -3.2 8.8 -3.2 -8.8 -8.8 -3.2 8.8 -3.2z" fill="#ff5a1f"/>
+      <path d="M98 30 l3.2 8.8 8.8 3.2 -8.8 3.2 -3.2 8.8 -3.2 -8.8 -8.8 -3.2 8.8 -3.2z" style="fill:var(--accent)"/>
     </symbol>
     <symbol id="logo-1" viewBox="0 0 470 120">
       <use href="#mark-1" x="0" y="0" width="120" height="120"/>
-      <text x="138" y="92" font-family="Manrope" font-weight="800" font-size="64" letter-spacing="-2.5" fill="currentColor">arc of <tspan fill="#ff5a1f">ai</tspan></text>
+      <text x="138" y="92" font-family="Manrope" font-weight="800" font-size="64" letter-spacing="-2.5" fill="currentColor">arc of <tspan style="fill:var(--accent)">ai</tspan></text>
     </symbol>
 
     <!-- 2 · Archway -->
@@ -81,15 +98,15 @@
     </symbol>
     <symbol id="logo-2" viewBox="0 0 470 120">
       <use href="#mark-2" x="0" y="0" width="120" height="120"/>
-      <text x="138" y="84" font-family="Manrope" font-weight="700" font-size="58" letter-spacing="-2" fill="currentColor">Arc<tspan font-weight="400" dx="12">of</tspan><tspan dx="12" fill="#ff5a1f">AI</tspan></text>
+      <text x="138" y="84" font-family="Manrope" font-weight="700" font-size="58" letter-spacing="-2" fill="currentColor">Arc<tspan font-weight="400" dx="12">of</tspan><tspan dx="12" style="fill:var(--accent)">AI</tspan></text>
     </symbol>
 
     <!-- 3 · Signal -->
     <symbol id="mark-3" viewBox="0 0 120 120">
-      <circle cx="22" cy="98" r="10" fill="#ff5a1f"/>
-      <path d="M22 70 A28 28 0 0 1 50 98" fill="none" stroke="#ff7a45" stroke-width="11" stroke-linecap="round"/>
-      <path d="M22 44 A54 54 0 0 1 76 98" fill="none" stroke="#8fb9a8" stroke-width="11" stroke-linecap="round"/>
-      <path d="M22 18 A80 80 0 0 1 102 98" fill="none" stroke="#3fb3c6" stroke-width="11" stroke-linecap="round"/>
+      <circle cx="22" cy="98" r="10" style="fill:var(--accent)"/>
+      <path d="M22 70 A28 28 0 0 1 50 98" fill="none" style="stroke:var(--c3)" stroke-width="11" stroke-linecap="round"/>
+      <path d="M22 44 A54 54 0 0 1 76 98" fill="none" style="stroke:var(--c2)" stroke-width="11" stroke-linecap="round"/>
+      <path d="M22 18 A80 80 0 0 1 102 98" fill="none" style="stroke:var(--c1)" stroke-width="11" stroke-linecap="round"/>
     </symbol>
     <symbol id="logo-3" viewBox="0 0 470 120">
       <use href="#mark-3" x="0" y="0" width="120" height="120"/>
@@ -100,21 +117,34 @@
     <!-- 4 · Connection -->
     <symbol id="mark-4" viewBox="0 0 120 120">
       <path d="M16 96 C 24 40, 96 40, 104 96" fill="none" stroke="url(#g-arc)" stroke-width="7" stroke-linecap="round"/>
-      <circle cx="16" cy="96" r="11" fill="#3fb3c6"/>
-      <circle cx="60" cy="54" r="11" fill="#8fb9a8"/>
-      <circle cx="104" cy="96" r="11" fill="#ff5a1f"/>
+      <circle cx="16" cy="96" r="11" style="fill:var(--c1)"/>
+      <circle cx="60" cy="54" r="11" style="fill:var(--c2)"/>
+      <circle cx="104" cy="96" r="11" style="fill:var(--accent)"/>
     </symbol>
     <symbol id="logo-4" viewBox="0 0 470 120">
       <use href="#mark-4" x="0" y="0" width="120" height="120"/>
-      <text x="140" y="88" font-family="Manrope" font-weight="500" font-size="60" letter-spacing="-2.2" fill="currentColor">arc of <tspan font-weight="800" fill="#ff5a1f">AI</tspan></text>
+      <text x="140" y="88" font-family="Manrope" font-weight="500" font-size="60" letter-spacing="-2.2" fill="currentColor">arc of <tspan font-weight="800" style="fill:var(--accent)">AI</tspan></text>
     </symbol>
   </defs>
 </svg>
+
+<nav class="palettebar" aria-label="Color palette">
+  <div class="wrap">
+    <strong>Colors</strong>
+    <button class="chip" data-p="original" aria-pressed="true"><i style="background:linear-gradient(90deg,#3fb3c6,#8fb9a8,#ff5a1f)"></i>Original</button>
+    <button class="chip" data-p="lime" aria-pressed="false"><i style="background:linear-gradient(90deg,#2fb6a6,#7fe0b0,#ddff67)"></i>Frontier lime</button>
+    <button class="chip" data-p="electric" aria-pressed="false"><i style="background:linear-gradient(90deg,#7b5cff,#3d8bff,#34e0ff)"></i>Electric</button>
+    <button class="chip" data-p="sunset" aria-pressed="false"><i style="background:linear-gradient(90deg,#e8368f,#ff6b4a,#ffb020)"></i>Sunset</button>
+    <button class="chip" data-p="ocean" aria-pressed="false"><i style="background:linear-gradient(90deg,#2747d8,#3aa0ff,#5ef2d6)"></i>Deep ocean</button>
+    <button class="chip" data-p="mono" aria-pressed="false"><i style="background:linear-gradient(90deg,#8a9087,#c9cec4,#fff);border:1px solid #0002"></i>Mono</button>
+  </div>
+</nav>
 
 <header class="wrap">
   <span class="eyebrow">Arc of AI · Identity exploration</span>
   <h1>Four modern logo concepts</h1>
   <p>Each concept keeps what already belongs to Arc of AI: the arc and the cyan/orange palette. The goal is a cleaner, geometric mark that reads well on the new dark homepage, at small sizes (favicon, social avatar) and on light backgrounds.</p>
+  <div class="swatches" id="swatches"></div>
   <div class="current">
     <img src="current-logo.png" alt="Current Arc of AI logo">
     <p><strong>Current logo</strong><br>Soft glow arc, sparkles and a stylised “AI”. The concepts below simplify it into flat shapes that scale down cleanly.</p>
@@ -168,6 +198,30 @@
   </article>
 
 </main>
+
+<script>
+  const palettes = {
+    original: { name: 'Original — the current Arc of AI cyan and orange', colors: ['#3fb3c6','#8fb9a8','#ff5a1f'] },
+    lime: { name: 'Frontier lime — matches the new homepage accent', colors: ['#2fb6a6','#7fe0b0','#ddff67','#4e8a12'] },
+    electric: { name: 'Electric — violet to cyan, the most “tech” option', colors: ['#7b5cff','#3d8bff','#34e0ff','#5a3df0'] },
+    sunset: { name: 'Sunset — warm, energetic, stands out from typical AI blue', colors: ['#e8368f','#ff6b4a','#ffb020'] },
+    ocean: { name: 'Deep ocean — calm, trustworthy, enterprise-friendly', colors: ['#2747d8','#3aa0ff','#5ef2d6'] },
+    mono: { name: 'Mono — single-color version for print, merch and sponsor walls', colors: ['#8a9087','#c9cec4','#ffffff','#12160f'] },
+  };
+  const chips = document.querySelectorAll('.chip');
+  const swatches = document.getElementById('swatches');
+  function apply(key) {
+    if (!palettes[key]) key = 'original';
+    document.body.dataset.palette = key;
+    chips.forEach(c => c.setAttribute('aria-pressed', String(c.dataset.p === key)));
+    const p = palettes[key];
+    swatches.innerHTML = `<span style="font-family:Manrope;font-weight:600;color:var(--ink)">${p.name}</span>` +
+      p.colors.map(c => `<span><b style="background:${c}"></b>${c}</span>`).join('');
+    try { history.replaceState(null, '', '#' + key); } catch (e) {}
+  }
+  chips.forEach(c => c.addEventListener('click', () => apply(c.dataset.p)));
+  apply(location.hash.slice(1) || 'original');
+</script>
 
 <footer class="wrap">Early concepts for discussion · Prepared by Paulo Valim · Typeface: Manrope (SIL Open Font License)</footer>
 </body>
